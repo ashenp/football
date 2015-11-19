@@ -1,0 +1,246 @@
+@charset "utf-8";
+/* CSS Document */
+* {
+	margin: 0px;
+	padding: 0px;
+	border: 0px;
+}
+body {
+	font-size: 12px;
+	line-height: 25px;
+	color: #333;
+	background-image: url(../images/bg16.gif);
+	background-repeat: repeat-x;
+	background-color: #FFF;
+}
+#bg {
+	width: 1003px;
+	height: 100%;
+	overflow: hidden;
+	background-image: url(../images/bg15.gif);
+	background-repeat: repeat-x;
+}
+#box {
+	width: 960px;
+	height: 100%;
+	overflow: hidden;
+	background-image: url(../images/bg_08.jpg);
+	background-repeat: no-repeat;
+	background-color: #FFF;
+	margin-left: 43px;
+}
+#top {
+	width: 960px;
+	height: 84px;
+}
+#left {
+	width: 156px;
+	height: 100%;
+	overflow: hidden;
+	float: left;
+	padding-top: 100px;
+}
+#left-menu {
+	width: 140px;
+	height: 100%;
+	overflow: hidden;
+	margin: 0px auto;
+	line-height: 30px;
+}
+#left-pic {
+	width: 140px;
+	height: 100%;
+	overflow: hidden;
+	margin: 10px auto 0px auto;
+	text-align: center;
+}
+#main {
+	width: 804px;
+	height: 100%;
+	overflow: hidden;
+	float: left;
+}
+#banner {
+	height: 108px;
+	text-align: right;
+}
+#main-border {
+	height: 100%;
+	overflow: hidden;
+	border: solid 2px #690;
+}
+#title1 {
+	width: 760px;
+	height: 55px;
+	border-bottom: 1px solid #E8E8E8;
+	margin: 0px auto;
+	font-family: 微软雅黑;
+	font-size: 16px;
+	font-weight: bold;
+	color: #666;
+	line-height: 55px;
+}
+#login-bg {
+	width: 700px;
+	height: 250px;
+	background-image: url(../images/index29.gif);
+	background-repeat: no-repeat;
+	margin: 15px auto 30px auto;
+	padding: 23px 20px 0px 20px;
+}
+#login {
+	width: 337px;
+	height: 100%;
+	overflow: hidden;
+	float: left;
+	background-image: url(../images/index32.gif);
+	background-repeat: no-repeat;
+	padding-top: 65px;
+}
+#email,#password {
+	line-height: 16px;
+	color: #333;
+	height: 16px;
+	width: 150px;
+	border: 1px solid #E5E5E5;
+	margin: 3px 0px 3px 10px;
+}
+#button1 {
+	float: right;
+	margin-top: 5px;
+}
+#login img {
+	margin-top: 10px;
+}
+#login-right {
+	width: 304px;
+	height: 100%;
+	overflow: hidden;
+	background-image: url(../images/index38.gif);
+	background-repeat: no-repeat;
+	background-position: 10px top;
+	padding-left: 59px;
+}
+#bottom-link {
+	clear: left;
+	height: 30px;
+	line-height: 30px;
+	background-color: #F4F4F4;
+	text-align: center;
+}
+#bottom {
+	width: 650px;
+	height: 80px;
+	padding-top: 20px;
+	margin: 0px auto;
+	color: #666;
+}
+#bottom img {
+	float: left;
+	margin-right: 20px;
+	margin-top: 20px;
+}
+#user-title {
+	font-weight: bold;
+	line-height: 30px;
+	border-bottom: dashed 1px #E8E8E8;
+	margin-top: 20px;
+}
+.font01 {
+	color: #F30;
+	
+}
+#user-list{
+	margin-top: 10px;
+	line-height: 30px;
+	padding-left: 10px;
+}
+#reg-bg {
+	width: 700px;
+	height: 100%;
+	overflow: hidden;
+	background-image: url(../images/index29.gif);
+	background-repeat: no-repeat;
+	margin: 15px auto 30px auto;
+	padding: 23px 20px 0px 20px;
+}
+#reg {
+	width: 680px;
+	height: 100%;
+	overflow: hidden;
+	margin: 0px auto;
+	line-height: 30px;
+}
+#reg li{
+	list-style-type: none;
+	border-bottom: dashed 1px #E8E8E8;
+}
+#uname1,#upass1,#upass2,#truename,#email,#phone,#adress,#question,#daan {
+	line-height: 16px;
+	color: #333;
+	height: 16px;
+	width: 270px;
+	border: 1px solid #E5E5E5;
+	margin: 0px 10px 0px 20px;
+}
+#radio {
+	margin-left: 15px;
+}
+#button2 {
+	margin-top: 15px;
+	margin-left: 200px;
+	margin-right: 20px;
+}
+#button4 {
+	margin-top: 10px;
+	margin-left: 100px;
+}
+
+#daan1 {
+	line-height: 16px;
+	color: #333;
+	height: 16px;
+	width: 178px;
+	border: 1px solid #E5E5E5;
+	margin: 3px 0px 3px 10px;
+}
+.link01:link {
+	color: #333;
+	text-decoration: underline;
+}
+.link01:hover {
+	color: #690;
+	text-decoration: none;
+}
+.link01:active {
+	color: #690;
+	text-decoration: none;
+}
+.link01:visited {
+	color: #333;
+	text-decoration: underline;
+}
+.link02:link {
+	color: #F30;
+	font-weight: bold;
+	text-decoration: underline;
+}
+.link02:hover {
+	color: #333;
+	font-weight: bold;
+	text-decoration: none;
+}
+.link02:active {
+	color: #333;
+	font-weight: bold;
+	text-decoration: none;
+}
+.link02:visited {
+	color: #F30;
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+
+
+

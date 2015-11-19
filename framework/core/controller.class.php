@@ -1,96 +1,119 @@
-<?php 
-class Controller{
-	//uniform the error template
-	public function error($msg = '', $url = '' ,$delay = 2) {
-		if($url == ''){
-			$redirect = isset($_SERVER["HTTP_REFERER"]) ? $_SERVER["HTTP_REFERER"] : $url;
-		}else {
-			$redirect = $url;
-		}
-		
-		$smarty = new Smarty();
-		$smarty->setTemplateDir(VIEWS_DIR.'/remind');
-		$smarty->setCompileDir(TMP_DIR);
-		$smarty->assign('msg', $msg);
-		$smarty->assign('redirect', $redirect);
-		$smarty->assign('delay', $delay);
-		$smarty->display('error.tpl');
-	}
+<?php
+/**
+ * Controller控制层
+ * @author liu
+ * @copyright bestdo.com 2013-05-18
+ */
+ class Controller{
+ 	
+    //用户请求访问的方法
+	public $_function = 'index';
+	
+	public $_outputFormat = 'html';
+	
+    protected $_data = array();
 
-	public function success($msg = '', $url = '', $delay = 2) {
-		if($url == ''){
-			$redirect = isset($_SERVER["HTTP_REFERER"]) ? $_SERVER["HTTP_REFERER"] : $url;
-		}else {
-			$redirect = $url;
-		}
-		
-		$smarty = new Smarty();
-		$smarty->setTemplateDir(VIEWS_DIR.'/remind');
-		$smarty->setCompileDir(TMP_DIR);
-		$smarty->assign('msg', $msg);
-		$smarty->assign('redirect', $redirect);
-		$smarty->assign('delay', $delay);
-		$smarty->display('success.tpl');
-	}
+    
+	//完成controller的时候才执行
+//	public function __destruct() {
+//	 	return Response::instance()->output($this->_data);
+//	}
+	
+    /**
+     * Entry function of the module
+     * @see http
+     *
+     * @return bool
+     */
+    public function entry__(){
+		$funName = $this->_function;
+    	//$this->before();	//预处理
+    	$this->$funName();
+    	//$this->after();	//主要方法执行后工作
+        return true;
+    }
 
-	public function display($tpl,$params = array()) {
-		$className = get_class($this);
-		$strArray = explode('_',ltrim($className, 'Controller_'));
-		$str = '';
-		foreach ($strArray as $value) {
-			$str .= '/'.lcfirst($value);
-		}
-
-		$smarty = new Smarty();
-		$smarty->setTemplateDir(VIEWS_DIR.$str);
-		$smarty->setCompileDir(TMP_DIR);
-		foreach ($params as $key => $value) {
-			$smarty->assign($key,$value);
-		}
-		$smarty->display($tpl.'.tpl');
-	}
-
-
-	//unified the json error output
-	public function ajaxError($msg = '', $data = '', $status = 400) {
-		echo json_encode(array('status'=>$status,'msg'=>$msg, 'data'=>$data));
-	}
-
-	//unified the json success output
-	public function ajaxSuccess($msg = '', $data = '', $status = 200) {
-		echo json_encode(array('status'=>$status, 'msg'=>$msg, 'data'=>$data));
-	}
-
-
-	//unified the error
-	public function unifiedError() {
-		$msg = isset($_GET['msg']) ? $_GET['msg'] : '';
-		return $this->error($msg);
-	}
-
-	//unified the success
-	public function unifiedSuccess() {
-		$msg = isset($_GET['msg']) ? $_GET['msg'] : '';
-		return $this->success($msg);
-	}
-
+    /**
+     * @todo smarty性能原因，尚未启用
+     * 显示网站头
+     * 从权限地方得到title,再传递到前端,一般根据不同的模块与平台的时候,需要在所属的controller类时行重写这个方法
+     * 
+     *
+     */
+    public function before() {
+    	if($this->_outputFormat == 'html') {
+    		 $this->display($this->_header);
+    	}
+    }
+    
+    /**
+     * @todo smarty性能原因，尚未启用
+     * 显示网站尾
+     *
+     */
+    public function after() {
+    	if($this->_outputFormat == 'html') {
+			$this->display($this->_footer);
+    	}
+    }
+    
+    //HTML的形式输出方式
+    public function display($template, $parameters = array()) {
+		//期望模板与模块自动对应
+ 		if(!strpos($template, '/')) {
+ 			$template = str_replace('_', '/', ltrim(strtolower(get_class($this)), 'controller_')).'/'.$template;
+ 		}
+    	Response::instance()->display($template, $parameters);
+    }
+    
+    //输出方式只有非HTML的方式的时候才生效
+    public function output($data) {
+    	Response::instance()->output($data, $this->_outputFormat);
+    }
+	
+	/**
+     * ajax返回数据
+     *
+     * @param 返回数据 $data
+     * @param 状态码 $status 只有200是正确的
+     */
+    public function ajaxSuccess($data, $status = 200) {
+    	echo json_encode(array('data' => $data, 'status' => $status));exit;
+    }
+    
+     /**
+     * ajax返回数据
+     *
+     * @param 返回数据 $data
+     * @param 状态码 $status 只有200是正确的
+     */
+    public function ajaxError($data, $status = 400) {
+ 
+    	echo json_encode(array('data' => $data, 'status' => $status));exit;
+    }
+  
+   	//smarty fetch方法 HTML的形式返回方式模板 
+    public function fetch($template, $parameters = array()) {
+    	//暂时不启用自动更新网站头
+//    	$parameters['template_header'] = $this->_header;
+//    	$parameters['template_footer'] = $this->_footer;
+		//期望模板与模块自动对应
+ 		if(!strpos($template, '/')) {
+ 			$template = str_replace('_', '/', ltrim(strtolower(get_class($this)), 'controller_')).'/'.$template;
+ 		}
+    	return Response::instance()->fetch($template, $parameters);
+    }
+    
+    /**
+     * 标准化excel导出功能
+     * @param array $header 表头
+     * @param array $data 导出数据
+     * @return file
+     * 
+     */
+    public function _export($header, $data) {
+    	
+    	return Excel::download($header, $contents, '', 'xls');
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- ?>
+?>

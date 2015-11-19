@@ -1,63 +1,74 @@
-<?php 
+<?php
+/**
+ *用户管理
+ */
 class WebApi_User extends WebApi{
-
-	public static $instance__;
-	public static function &instance() {
-		if(!isset(self::$instance__)) {
-			$className = __CLASS__;
-			self::$instance__ = new $className();
+	
+	static public $instance__;
+	
+	static public function &instance (){
+		if (!isset(self::$instance__)) {
+			$class = __CLASS__;
+			self::$instance__ = new $class;
 		}
 		return self::$instance__;
 	}
 
-	public function getUserByUid($uid) {
-		if(!isset($uid) || $uid <= 0) {
-			return false;
+	public function getUserInfoByUid($uid) {
+		if (!$uid) {
+			return array();
 		}
-		return CoreApi_User::instance()->row($uid, '*');
+		
+// 		$remote = new Remote(RC_SERVICE_ID);
+//         $returnData = $remote->post('user/getUserInfo', array('uid' => $uid));
+        
+		$remote = new Remote(USER_SERVICE_ID);
+		$returnData = $remote->post('uccore/v1/api/account/findUserInfo', array('uid' => $uid));
+        if ($returnData['code'] != 200) {
+        	return array();
+        }
+        if (empty($returnData['data'])) {
+        	return array();
+        }
+        
+        return $returnData['data'];
 	}
-	//get user record from user by email
-	public function getUserByEmail($email) {
-		if(!isset($email) || $email == '') {
+	
+	/**
+	 * 通过城市名称获取城市id
+	 *
+	 * @param string $name
+	 * @return int id
+	 */
+	public function getRegionIdByName($name) {
+		if (!$name) {
 			return false;
 		}
-		return CoreApi_User::instance()->getUserByEmail($email);
+		
+		$result = CoreApi_Region::instance()->search(array('region_id'), array('name' => $name), 1,1);
+		if (empty($result)) {
+			return false;
+		}
+		
+		return $result[0]['region_id'];
 	}
-
-	public function getAllUserByEmail($email) {
-		if(!isset($email) || $email == '') {
+	
+	/**
+	 * 通过id获取省市区名称
+	 *
+	 * @param int $id
+	 * @return array
+	 */
+	public function getRegionNameById($id) {
+		if (!$id) {
 			return false;
 		}
-		return CoreApi_User::instance()->getAllUserByEmail($email);
+		
+		$result = CoreApi_Region::instance()->row(array('name'), $id);
+		if (empty($result)) {
+			return false;
+		}
+		
+		return $result['name'];
 	}
-
-	//add a new user
-	public function addUserByParams($params){
-		if(!isset($params['email'])){
-			return false;
-		}
-		if(!isset($params['username'])) {
-			return false;
-		}
-		if(!isset($params['password'])) {
-			return false;
-		}
-		return CoreApi_User::instance()->addUserByParams($params);
-
-
-	}
-
-	public function activateUserByUid($uid) {
-		if($uid <= 0) {
-			return false;
-		}
-		return CoreApi_User::instance()->activateUserByUid($uid);
-	}
-
-
-
-
-
-
 }
-?>

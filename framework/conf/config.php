@@ -1,8 +1,12 @@
-<?php 
-ini_set('date.timezone','Asia/Shanghai');
-define('CONTROLLER_DIR', SITE_ROOT.'/controller');
-define('STATIC_DIR', SITE_ROOT.'/static');
-define('VIEWS_DIR', SITE_ROOT.'/views');
-define('TMP_DIR', SITE_ROOT.'/tmp_file');
-define('SOURCE_DIR', SITE_ROOT.'/source');
-?>
+<?php
+//本文件配置本项目环境变量
+$dbServerArray = array(
+        'Default' => array(
+                'write' => 'mysql:host=localhost;port=3306;dbname=member|root|',
+                'reads' => array(
+                    'mysql:host=localhost;port=3306;dbname=member|root|',
+                    'mysql:host=localhost;port=3306;dbname=member|root|',
+                )
+        )
+);
+

@@ -1,0 +1,233 @@
+@charset "utf-8";
+/* CSS Document */
+*{padding: 0;margin:0;}
+body{
+	padding-bottom:0px;
+	margin:0px auto;
+	padding-left:0px;
+	padding-right:0px;
+	font:12px;
+	background:url(../images/bg.png);
+	color:#525252;
+	padding-top:0px;
+	}
+.banner{
+	width:auto;
+	margin:0px auto;
+}
+.banner-top{
+	width:100%
+}
+.b-daohang{
+	margin:0px auto;
+	margin-top:-10px;
+	padding-left:150px;
+	width:860px;
+	}
+
+.b-menu{
+	padding-bottom:0px;
+	list-style-type:none;
+	margin:0px;
+	padding-left:0px;
+	padding-right:0px;
+	list-style-image:none;
+	padding-top:0px;
+	}
+.b-menu .b-nav{
+	position:relative;
+	float:left;}
+
+.b-nav .b-a1{
+	border-bottom:#000 0px solid;
+	text-align:center;
+	border-left:#000 0px solid;
+	padding-bottom:4px;
+	padding-left:10px;
+	width:100px;
+	padding-right:10px;
+	display:block;
+	background:#f8f8f8;
+	color:#c70081;
+	font-size:16px;
+	border-top:#000 0px solid;
+	border-right:#000 0px solid;
+	padding-top:4px;
+	/*text-decoration:none;*/
+	}
+.b-login input{
+	width: 100px;
+}
+.b-nav .b-a22{
+	border-bottom:#000 0px solid;
+	text-align:center;
+	border-left:#000 0px solid;
+	padding-bottom:4px;
+	padding-left:10px;
+	width:50px;
+	padding-right:10px;
+	display:block;
+	background:#f8f8f8;
+	color:#c70081;
+	font-size:16px;
+	border-top:#000 0px solid;
+	border-right:#000 0px solid;
+	padding-top:4px;
+	/*text-decoration:none;*/
+	}
+
+.b-nav .b-a1:hover{
+	background:#c70081;
+	color:#fff;}
+.b-nav .b-a22:hover{
+	background:#c70081;
+	color:#fff;}
+	
+.b-ci{
+	z-index:100;
+	position:absolute;
+	padding-bottom:0px;
+	list-style-type:none;
+	margin:0px;
+	padding-left:0px;
+	padding-right:0px;
+	display:none;
+	top:25px;
+	list-style-image:none;
+	padding-top:0px;
+	}
+.b-li1{
+	border-bottom:#000 0px solid;
+	text-align:center;
+	border-left:#000 0px solid;
+	padding-bottom:4px;
+	padding-left:10px;
+	width:100px;
+	padding-right:10px;
+	display:block;
+	background:#f8f8f8;
+	color:#c70081;
+	font-size:16px;
+	border-top:#000 0px solid;
+	border-right:#000 0px solid;
+	padding-top:4px;}
+	
+.b-li1:hover{
+	background:#c70081;
+	color:#fff;}
+	
+.b-banner{
+	margin:0px auto;
+	margin-top:5px;
+	width:960px;
+	height:385px;}
+#box_wwwzzjsnet{
+	position:relative;
+	margin:0px auto;
+	width:960px;
+	height:385px;
+	overflow:hidden;
+	cursor:pointer;
+	}
+#box_wwwzzjsnet .list{position:relative;width:960px;height:385px;overflow:hidden;}
+#box_wwwzzjsnet .list ul{position:absolute;top:0;left:0;}
+#box_wwwzzjsnet .list li{width:960px;height:385px;overflow:hidden;}
+#box_wwwzzjsnet .count{position:absolute;right:0;bottom:5px;}
+#box_wwwzzjsnet .count li{color:#fff;float:left;width:20px;height:20px;cursor:pointer;margin-right:5px;overflow:hidden;background:#F90;opacity:0.7;filter:alpha(opacity=70);border-radius:20px;}
+#box_wwwzzjsnet .count li.current{color:#fff;opacity:1;filter:alpha(opacity=100);font-weight:700;background:#f60;}
+
+
+
+
+
+
+img{
+	border-bottom:0px;
+	border-top:0px;
+	border-right:0px;
+	border-left:0px;
+	text-decoration:none;
+	}
+	
+.bj-bj{
+	margin:0px auto;
+	margin-top:10px;			
+	width:960px;
+	}
+.b-shang{
+	width:75%;
+	float:left;
+	height:280px;
+	overflow:hidden;
+	background-color:#FFFFFF;}
+	
+.b-biao{
+	width:100%;
+	float:left;
+	
+	}
+.b-a1{
+	line-height:24px;
+	width:100%;
+	display:block;
+	height:100%;
+	color:#c70081;
+	font-size:16px;
+	font-weight:bold;
+	/*text-decoration:none;*/
+	margin:10px -2px;
+}
+
+.b-a22{
+line-height:24px;
+display:block;
+height:100%;
+color:#c70081;
+font-size:16px;
+font-weight:bold;
+text-decoration:none;
+margin:10px;}
+
+.b-a2{
+	padding-bottom:0px;
+	padding-left:10px;
+	padding-right:10px;
+	display:block;
+	padding-top:0px;
+	font-size:14px;
+	color:#999999;
+	text-decoration:none;}
+.b-size{
+	float:left;}
+	
+#b-img{
+	margin-left:10px;	
+	float:left;
+	 }
+
+	
+	
+	
+.b-login{
+	margin-left:1%;
+	width:24%;
+	float:left;
+	height:280px;
+	overflow:hidden;
+	background-color:#FFFFFF;}
+	
+.bj-zan{
+	margin:0px auto;
+	margin-top:300px;			
+	width:960px;
+	background-color:#FFF;
+	height:280px;
+	}
+.b-zhu
+{
+	margin:0px auto;
+	margin-top:10px;			
+	width:960px;
+	background-color:#DDDDDD;
+	height:140px;
+	}

@@ -1,65 +1,58 @@
-<?php 
-
+<?php
 class CoreApi_User extends CoreApi {
-
-	protected static $instance__;
 	protected $_tableName = 'user';
 	protected $_primaryKey = 'uid';
-
-
-	public static function instance() {
-		if(!isset(self::$instance__)) {
-			$className = __CLASS__;
-			self::$instance__ = new $className();
+	protected $_fields = array(
+		'uid' => 'int',
+		'username' => 'string',
+		'password' => 'string',
+		'question' => 'string',
+		'answer' => 'string',
+		'realname' => 'string',
+		'sex' => 'int',
+		'address' => 'string',
+		'mobile' => 'string',
+		'email' => 'string'
+	);
+	
+	static public $instance__;
+	
+	static public function &instance (){
+		if (!isset(self::$instance__) || empty(self::$instance__)) {
+			$class = __CLASS__;
+			self::$instance__ = new $class;
 		}
 		return self::$instance__;
 	}
 
-	//get one user by
-	public function getUserByEmail($email) {
-		$sql = 'select * from '.$this->_tableName;
-		$sql .= ' where email=:email';
-		$sql .= ' and status<>-1';
+	public function getUser($params) {
+		$sql = 'select * from '.$this->_tableName.' where 1';
 		$binds = array();
-		$binds[':email'] = $email;
-		return $this->db->select_one($sql, $binds); 
+		foreach ($params as $key => $value) {
+			$sql .= ' and '.$key.'=:'.$key;
+			$binds[':'.$key] = $value; 
+		}
+		return $this->db->select_one($sql, $binds);
+	}
+	
+	
+
+	public function addUser($params) {
+		$sql = 'insert into '.$this->_tableName.'(username, password, realname, sex, email, mobile, address, question, answer) values (';
+		$sql .= "'".$params['username']."',";
+		$sql .= "'".$params['password']."',";
+		$sql .= "'".$params['realname']."',";
+		$sql .= $params['sex'].',';
+		$sql .= "'".$params['email']."',";
+		$sql .= "'".$params['mobile']."',";
+		$sql .= "'".$params['address']."',";
+		$sql .= "'".$params['question']."',";
+		$sql .= "'".$params['answer']."')";
+		return $this->db->insert($sql);
 	}
 
-	public function getAllUserByEmail($email) {
-		$sql = 'select * from '.$this->_tableName;
-		$sql .= ' where email=:email';
-		$sql .= ' and status<>-1';
-		$binds = array();
-		$binds[':email'] = $email;
-		return $this->db->select($sql, $binds);
-	}
-
-	public function addUserByParams($params) {
-		$createTime = date('Y-m-d H:i:s', time());
-		$sql = 'insert into '.$this->_tableName;
-		$sql .= ' (username,password,email,create_time,status) ';
-		$sql .= ' values (:name,:password,:email,:create_time,:status)';
-		$binds = array();
-		$binds[':name'] = $params['username'];
-		$binds[':password'] = $params['password'];
-		$binds[':email'] = $params['email'];
-		$binds[':create_time'] = $createTime;
-		$binds[':status'] = 0;//at first set status=0  havn't been activated
-		return $this->db->insert($sql, $binds);
-	}
-
-	public function activateUserByUid($uid) {
-		$sql = 'update '.$this->_tableName.' set status=:status';
-		$sql .= ' where uid=:uid';
-		$binds = array();
-		$binds[':uid'] = $uid;
-		$binds[':status'] = 1;
-		return $this->db->update($sql, $binds);
-	}
 
 
 }
 
 
-
- ?>
