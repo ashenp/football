@@ -18,7 +18,7 @@ class Controller_Mgr_Manager extends Controller_Mgr_Base {
 			session_start();
 		}
 		unset($_SESSION['manager']);
-		header('Location: /admin/index');
+		header('Location: /manager/index');
 	}
 
 	public function ajaxDeleteActivity() {

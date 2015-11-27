@@ -67,6 +67,7 @@ h1,h2,h3.center{
     <div class="notice">
       <h3 class="new_activity" style="cursor:pointer">新增活动</h3>
       <h3 class="">活动报名批量上传<h3>
+      <h3><a href="/manager/logout">管理员退出登录</a></h3>
     </div>
     <div class="activities">
       {foreach from=$activities item=item}

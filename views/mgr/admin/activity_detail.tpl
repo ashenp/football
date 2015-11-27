@@ -58,7 +58,7 @@ h1,h2,h3.center{
         <br>
         {if $activity['if_file'] == 1}
           <button style="width:150px;height:30px">
-            <a class="download" activity_id="{$activity['activity_id']}" href="/admin/download?file={$activity['file']}" target="_blank">下载附件</a>
+            <a class="download" activity_id="{$activity['activity_id']}">下载附件</a>
           </button>
         {else}
           
@@ -95,8 +95,7 @@ $(document).ready(function() {
         return;
       }else {
         var file = jdata['data'];
-        // alert(file);return;
-        window.open('/admin/download?file='+file);
+        window.location.href = '/admin/download?file='+file;
       }
     },'json');
   });
