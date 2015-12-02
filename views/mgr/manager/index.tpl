@@ -7,13 +7,21 @@
 <link href="/static/css/css.css" type="text/css" rel="stylesheet" />
 <script src="/static/js/jquery.js" type="text/javascript"></script>
 <style>
+
 div.center{
   margin-left:auto;
   margin-right:auto;
+
+  max-width:50%;
+ /* min-height:300px;
+  height:auto!important; 
+  height:300px;*/
+  background-color: #fff;
 }
 h1,h2,h3.center{
   text-align: center;
 }
+
 
 .notice{
   float:left;
@@ -21,7 +29,7 @@ h1,h2,h3.center{
   padding-left:20px;
   padding-top: 20px;
   width: 20%;
-  height: 280px;
+  background-color: #fff;
 }
 
 .activities{
@@ -31,7 +39,7 @@ h1,h2,h3.center{
   width: 70%;
   padding-left: 20px;
   padding-top:20px;
-  height: 280px;
+  background-color: #fff;
 }  
 
 </style>
@@ -47,10 +55,7 @@ h1,h2,h3.center{
     <a href="/admin/index" class="b-a1">首页</a>
   </li>
   <li class="b-nav">
-    <a href="" class="b-a1">新闻动态</a>
-  </li>
-  <li class="b-nav">
-    <a href="" class="b-a1">留言板</a>
+    <a href="/manager/messages" class="b-a1">留言板</a>
   </li>
       <li class="b-nav">
     <a href="" class="b-a1">跨年跑</a>
@@ -63,7 +68,7 @@ h1,h2,h3.center{
   </ul>
 </div>
 
-<div class="center" style="max-width:50%;min-height:300px;background:#fff">
+<div class="center">
     <div class="notice">
       <h3 class="new_activity" style="cursor:pointer">新增活动</h3>
       <h3 class="">活动报名批量上传<h3>
@@ -78,13 +83,17 @@ h1,h2,h3.center{
 {literal}
 <script type="text/javascript">
 $(document).ready(function() {
+    var height = $('.activities').css('height');
+    $('.notice').css('height',height);
+  });
+
+$(document).ready(function() {
   $('.activity').click(function() {
     window.location = $(this).attr('href');
   });
 
   $('.delete').click(function() {
     var activity_id = $(this).attr('activity_id');
-
     if(confirm('确认删除？')) {
       $.post('/manager/ajaxDeleteActivity',{activity_id:activity_id},function(jdata) {
         if(jdata['status'] != 200) {

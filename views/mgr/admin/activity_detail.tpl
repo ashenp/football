@@ -33,7 +33,7 @@ h1,h2,h3.center{
     <a href="" class="b-a1">新闻动态</a>
   </li>
   <li class="b-nav">
-    <a href="" class="b-a1">留言板</a>
+    <a href="/admin/message" class="b-a1">留言板</a>
   </li>
       <li class="b-nav">
     <a href="" class="b-a1">跨年跑</a>
@@ -57,15 +57,15 @@ h1,h2,h3.center{
         <br>
         <br>
         {if $activity['if_file'] == 1}
-          <button style="width:150px;height:30px">
-            <a class="download" activity_id="{$activity['activity_id']}">下载附件</a>
+          <button class="download" style="width:150px;height:30px;background-color: #DCDCDC;cursor: pointer" activity_id="{$activity['activity_id']}">下载附件
+            <!-- <a class="download" activity_id="{$activity['activity_id']}">下载附件</a> -->
           </button>
         {else}
           
         {/if}
         <div style="clear:both"></div>
         <br>
-        <button style="width:150px;height:30px;cursor:pointer" id="apply" activity_id="{$activity['activity_id']}">报名</button>
+        <button style="width:150px;height:30px;cursor:pointer;background-color: #DCDCDC" id="apply" activity_id="{$activity['activity_id']}">报名</button>
     </div>
 </div>
 

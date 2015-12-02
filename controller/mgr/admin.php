@@ -208,8 +208,46 @@ class Controller_Mgr_Admin extends Controller_Mgr_Base {
 		if($addResult === false || $addResult <= 0) {
 			return $this->error('注册失败');
 		}
-		return $this->success('注册成功');
+		return $this->success('注册成功',HOME_URL.'admin/index');
+	}
 
+	public function message() {
+		$page = isset($_REQUEST['page']) ?  $_REQUEST['page'] : 1;
+        $pagesize = isset($_REQUEST['pagesize']) ? $_REQUEST['pagesize'] : 20;
+        $messages = CoreApi_Message::instance()->pageMessage(array(), $page, $pagesize);
+        $count = CoreApi_Message::instance()->countMessage(array());
+        // var_dump($messages);exit;
+        $smartyParams = array();
+        $smartyParams['page'] = $page;
+        $smartyParams['pagesize'] = $pagesize;
+        $smartyParams['count'] = $count;
+        $smartyParams['messages'] = $messages;
+        return $this->display('messages', $smartyParams);
+	}
+
+
+	public function ajaxLeaveMessage() {
+		if(!isset($_SESSION)) {
+			session_start();
+		}
+		if(!isset($_SESSION['uid'])) {
+			return $this->ajaxError('您未登录，请登录后操作');
+		}
+		$uid = $_SESSION['uid'];
+		$message = isset($_REQUEST['message']) ? $_REQUEST['message'] : '';
+		if($message == '') {
+			return $this->ajaxError('留言不能为空');
+		}
+		if(strlen($message) > 255) {
+			return $this->ajaxError('留言不能超过255个字符');
+		}
+
+		$result = CoreApi_Message::instance()->insertMessage($message, $uid);
+
+		if($result === false || $result <= 0) {
+			return $this->ajaxError('发布留言失败');
+		}
+		return $this->ajaxSuccess('发布留言成功');
 	}
 	
 	

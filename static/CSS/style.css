@@ -176,9 +176,9 @@ body {
 	border-bottom: dashed 1px #E8E8E8;
 }
 #uname1,#upass1,#upass2,#truename,#email,#phone,#adress,#question,#daan {
-	line-height: 16px;
+	line-height: 19px;
 	color: #333;
-	height: 16px;
+	height: 20px;
 	width: 270px;
 	border: 1px solid #E5E5E5;
 	margin: 0px 10px 0px 20px;

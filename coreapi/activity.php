@@ -44,10 +44,20 @@ class CoreApi_Activity extends CoreApi {
 		return $this->db->page($sql, $binds ,$page, $pagesize);
 	}
 
-	public function addActivity($title, $content) {
+	public function addActivityWithoutFile($title, $content) {
 		$sql = 'insert into '.$this->_tableName.'(title,content,date,status)'.' values (';
 		$sql .= "'".$title."',";
 		$sql .= "'".$content."',";
+		$sql .= "'".date('Y-m-d')."',";
+		$sql .= '1)';
+		return $this->db->insert($sql);
+	}
+	public function addActivityWithFile($title, $content, $file) {
+		$sql = 'insert into '.$this->_tableName.'(title, content, if_file, file, date, status)'.' values (';
+		$sql .= "'".$title."',";
+		$sql .= "'".$content."',";
+		$sql .= '1'.',';
+		$sql .= "'".$file."',";
 		$sql .= "'".date('Y-m-d')."',";
 		$sql .= '1)';
 		return $this->db->insert($sql);

@@ -49,10 +49,7 @@ h1,h2,h3.center{
     <a href="/admin/index" class="b-a1">首页</a>
   </li>
   <li class="b-nav">
-    <a href="" class="b-a1">新闻动态</a>
-  </li>
-  <li class="b-nav">
-    <a href="" class="b-a1">留言板</a>
+    <a href="/manager/messages" class="b-a1">留言板</a>
   </li>
       <li class="b-nav">
     <a href="" class="b-a1">跨年跑</a>
@@ -66,11 +63,15 @@ h1,h2,h3.center{
 </div>
 
 <div class="center" style="max-width:50%;min-height:300px;background:#fff">
-    <input type="text" class="title" placeholder="请输入标题"  style="border:1px solid #000;font-size:20px;width:500px" />
+<form action="/manager/newActivitySubmit" method="post" enctype="multipart/form-data" accept-charset="utf-8">
+    <input type="text" name="title" class="title" placeholder="请输入标题"  style="border:1px solid #000;font-size:20px;width:500px" />
     <br>
-    <textarea cols=50 rows=10 class="content" placeholder="请输入内容" style="margin-top:30px;border:1px solid #000;width:500px;overflow-y:visible;font-size:20px"></textarea>
+    <textarea name="content" cols=50 rows=10 class="content" placeholder="请输入内容" style="margin-top:30px;border:1px solid #000;width:500px;overflow-y:visible;font-size:20px"></textarea>
     <br>
-    <input type="file" class="upload_file" style="width:200px" />
+    <input type="file" name="file" class="upload_file" style="width:200px" />
+    <input type="submit" name="submit" style="width:120px;height:30px;background-color: #D3D3D3" value="发布" />
+</form>
+   
 </div>
 <script type="text/javascript">
 
