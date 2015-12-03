@@ -249,6 +249,13 @@ class Controller_Mgr_Admin extends Controller_Mgr_Base {
 		}
 		return $this->ajaxSuccess('发布留言成功');
 	}
+
+	public function crossYearRun() {
+
+		$smartyParams = array();
+		// $result = CoreApi_Crossyearrun::instance()->sele
+		return $this->display('crossyearrun', $smartyParams);
+	}
 	
 	
 

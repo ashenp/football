@@ -5,12 +5,12 @@
  */
 
 //网站主域名
-define('DOMAIN', 'football.com');
+define('DOMAIN', 'lingpaojianghu.com');
 //网站访问地址
 define('HOME_URL', 'http://www.'.DOMAIN.'/');
 
 $domainArray = array(
-    'www.football.com' => array(
+    'www.lingpaojianghu.com' => array(
         'controller' => 'mgr',
         'outputFormat' => 'html',
         'version' => ''

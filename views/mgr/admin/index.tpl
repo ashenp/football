@@ -132,7 +132,7 @@ jQuery(document).ready(function() {
     <a href="/admin/message" class="b-a1">留言板</a>
   </li>
       <li class="b-nav">
-    <a href="" class="b-a1">跨年跑</a>
+    <a href="/admin/crossyearrun" class="b-a1">跨年跑</a>
   </li>
   <li class="b-nav">
     <a href="" class="b-a1">联系我们</a>
