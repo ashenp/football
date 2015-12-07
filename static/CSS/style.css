@@ -5,14 +5,6 @@
 	padding: 0px;
 	border: 0px;
 }
-body {
-	font-size: 12px;
-	line-height: 25px;
-	color: #333;
-	background-image: url(../images/bg16.gif);
-	background-repeat: repeat-x;
-	background-color: #FFF;
-}
 #bg {
 	width: 1003px;
 	height: 100%;

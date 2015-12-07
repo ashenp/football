@@ -30,7 +30,6 @@ class Controller_Mgr_Admin extends Controller_Mgr_Base {
 		}else if($smartyParams['if_log'] == 2) {
 			header('Location: /manager/index');
 		}
-		
 	}
 
 	public function loginPage() {
@@ -251,10 +250,108 @@ class Controller_Mgr_Admin extends Controller_Mgr_Base {
 	}
 
 	public function crossYearRun() {
+		$applyInfo = CoreApi_Crossyearrun::instance()->getApplyInfo();
+		$count = array();
+		foreach ($applyInfo as $key => $value) {
+			isset($count[$value['timezone']]) ? $count[$value['timezone']] += 1 : $count[$value['timezone']] = 1;
+		}
+		// var_dump($count);exit;
+		$applyInfoTemp = array();
+		foreach ($applyInfo as $key => $value) {
+			$applyInfoTemp[Model_Timezone::$timezoneArray[$value['timezone']]][]    = $value['username'];
+		}
 
+		foreach ($applyInfoTemp as $key => &$value) {
+			$value = implode(',',$value);
+		}
+
+		// var_dump($applyInfoTemp);exit;
+		$applyInfo = $applyInfoTemp;
 		$smartyParams = array();
-		// $result = CoreApi_Crossyearrun::instance()->sele
+		$smartyParams['applyInfo'] = $applyInfo;
+		$smartyParams['count'] = $count;
 		return $this->display('crossyearrun', $smartyParams);
+	}
+
+
+
+	public function applyYearRun() {
+		if(!isset($_SESSION)) {
+			session_start();
+		}
+
+		if(!isset($_SESSION['uid'])) {
+			return $this->error('您未登录，请登录后操作','/admin/index');
+		}
+
+		
+		$params = array();
+		$params['uid'] = $_SESSION['uid'];
+
+		$apply = CoreApi_Crossyearrun::instance()->getAppliers($params);
+		if(!empty($apply)) {
+			return $this->error('您已报名过跨年跑,请勿重复报名');
+		}
+
+
+		if(!isset($_POST['timezone'])) {
+			return $this->error('请选择时区再报名');
+		}else {
+			if($_POST['timezone'] == 'null') {
+				return $this->error('请选择时区再报名');
+			}
+			$params['timezone'] = $_POST['timezone'];
+		}
+		if(empty($_FILES['file'])) {
+			$addResult = CoreApi_Crossyearrun::instance()->applyCrossYearRun($params);
+			if($addResult === false || $addResult <= 0) {
+				return $this->error('报名失败');
+			}else {
+				return $this->success('报名成功',HOME_URL.'/admin/crossYearRun');
+			}
+		}else {
+			if($_FILES['file']['name'] != '') {
+				if ($_FILES["file"]["error"] > 0){
+					return $this->error('文件上传失败'.$_FILES["file"]["error"]);
+				}
+				$fileUrl = FILE_ROOT.'/crossyearrun/'.mb_convert_encoding($_FILES['file']['name'], "gbk","utf-8");
+				// echo $fileUrl;exit;
+				if(file_exists($fileUrl)) {
+					return $this->error('该文件名已存在，请修改文件名后重试');
+				}
+				if($_FILES["file"]["tmp_name"] == '') {
+					return $this->error('上传失败');
+				}
+				$params['if_file'] = 1;
+				$params['file'] = "'".$_FILES['file']['name']."'";
+				db::begintrans();
+				$addResult = CoreApi_Crossyearrun::instance()->applyCrossYearRun($params);
+				if($addResult === false || $addResult <= 0) {
+					return $this->error('报名失败');
+					db::rollback();
+				}else {
+					if(move_uploaded_file($_FILES["file"]["tmp_name"], $fileUrl)) {
+						db::commit();
+						return $this->success('报名成功',HOME_URL.'/admin/crossYearRun');
+					}else {
+						db::rollback();
+						return $this->error('文件上传失败，报名失败');
+					}
+			}
+		}else {
+			$addResult = CoreApi_Crossyearrun::instance()->applyCrossYearRun($params);
+			if($addResult === false || $addResult <= 0) {
+				return $this->error('报名失败');
+			}
+			return $this->success('报名成功');
+			}
+		}
+
+
+
+		// var_dump($_POST);
+		// var_dump($_FILES);exit;
+
 	}
 	
 	

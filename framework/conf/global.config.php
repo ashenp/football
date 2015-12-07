@@ -24,20 +24,6 @@ define('DEBUG', true);
 //编码
 define('CHARSET', 'utf-8');
 
-//功能开关
-define('ROLE_CHECK', true);
-define('PASSWORD', 'e10adc3949ba59abbe56e057f20f883e');
-//管理平台前缀
-//在domain.php中定义域名，不要在这里定义，否则会冲突
-//define('MGR_PRIFIX', 'badminton.res');
-
-define('VENUE_TYPE_PREFIX_BADMINTON', '102');
-//added by xuef 2015-07-30
-//define('HOME_URL', '');
-
-//网站安全密钥
-
-//加密初始化向量 加密模式是ECB会被忽略，每个服务器可以不同，但必须配置8个字符
 //日志目录
 /********************常量end****************************/
 

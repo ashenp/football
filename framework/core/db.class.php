@@ -34,7 +34,7 @@ class db {
 	 * @param string $mod 配置模块
 	 * @param string $connChar 编码集
 	 */
-	public function __construct($mod = "Default",  $connChar = 'utf8') {
+	public function __construct($mod = "default",  $connChar = 'utf8') {
 	    $dbMod = self::$_mod;
 		if($dbMod != $mod) {
 		    db::$writeConn = null;

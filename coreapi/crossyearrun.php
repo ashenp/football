@@ -32,6 +32,29 @@ class CoreApi_Crossyearrun extends CoreApi {
         }
         return $this->db->select($sql, $binds);
     }
+
+
+    //添加一条报名记录
+    public function applyCrossYearRun($params = array()) {
+        if(isset($params['uid']) && isset($params['timezone'])) {
+            $sql = 'insert into '.$this->_tableName.' (uid, timezone, if_file, file, time)';
+            
+            if(isset($params['if_file']) && $params['if_file'] && $params['file'] != '') {
+                $sql .= " values(".$params['uid'].",".$params['timezone'].","."1".",".$params['file'].",".time().")";
+            }else {
+                $sql .= " values(".$params['uid'].",".$params['timezone'].","."0". ","."''".",".time().")";
+            }
+            return $this->db->insert($sql);
+        }
+
+        return false;
+    }
+
+    public function getApplyInfo() {
+        $sql = 'select crossyearrun.uid,crossyearrun.timezone,user.username from '.$this->_tableName.' ,user'.' where 1 and user.uid=crossyearrun.uid';
+         // $sql = 'select message.message_id,message.content,message.date,message.uid,user.username from '.$this->_tableName.' ,user '.' where 1 ';
+        return $this->db->select($sql, array());
+    }
 }
 
 

@@ -2,9 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>操作提示 - 百动网管理平台</title>
-<link href="{staticurl action="admin/wrap.css" type="css"}" type="text/css" rel="stylesheet" />
-<link href="{staticurl action="admin/common.css" type="css"}" type="text/css" rel="stylesheet" />
+<title>操作提示</title>
+<link href="{staticurl action="wrap.css" type="css"}" type="text/css" rel="stylesheet" />
+<link href="{staticurl action="common.css" type="css"}" type="text/css" rel="stylesheet" />
 </head>
 
 <body>
